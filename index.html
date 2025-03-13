@@ -1,49 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <!-- 关键兼容声明 -->
+    <meta name="x5-video-player-type" content="h5" />
+    <meta name="x5-video-player-fullscreen" content="false" />
+    <title>H5视频控件隐藏示例</title>
     <style>
-      button {
-        width: 200px;
-        height: 50px;
-        margin-right: 30px;
-        margin-top: 30px;
+      /* 通用隐藏样式 */
+      video::-webkit-media-controls {
+        display: none !important;
+      }
+      video::-webkit-media-controls-enclosure {
+        display: none !important;
+      }
+      video::-webkit-media-controls-panel {
+        display: none !important;
+      }
+      video::-webkit-media-controls-play-button {
+        display: none !important;
+      }
+      video::-moz-media-controls {
+        display: none !important;
+      }
+
+      /* 视频容器样式 */
+      .video-wrapper {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        position: relative;
+        background: #000;
+        /* 解决安卓部分机型显示异常 */
+        transform: translateZ(0);
+      }
+
+      /* 自定义播放按钮（可选） */
+      .custom-play {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
       }
     </style>
   </head>
   <body>
-    <video
-      class=""
-      autoplay=""
-      playsinline="true"
-      x5-playsinline="true"
-      webkit-playsinline="true"
-      mediatype="video"
-      data-index="-1"
-      crossorigin="anonymous"
-      data-xgplayerid="db067458-8e20-47d0-80d9-611c1bbaebe7"
-      src="./demo.mp4"
-      id="video"
-    ></video>
-    <br />
-    <button id="startBtn">开始</button>
-    <br />
-    <button id="pauseBtn">暂停</button>
+    <!-- 视频容器 -->
+    <div class="video-wrapper">
+      <video
+        id="myVideo"
+        width="100%"
+        height="auto"
+        playsinline
+        webkit-playsinline="true"
+        x5-video-player-type="h5"
+        x5-playsinline="true"
+        preload="auto"
+        controlsList="nodownload nofullscreen noremoteplayback"
+        poster="poster.jpg"
+      >
+        <source src="video.mp4" type="video/mp4" />
+        您的浏览器不支持视频播放
+      </video>
+      <!-- 自定义播放按钮 -->
+      <button onclick="togglePlay()">播放</button>
+    </div>
 
     <script>
-      const video = document.getElementById("video");
-      const startBtn = document.getElementById("startBtn");
-      const pauseBtn = document.getElementById("pauseBtn");
+      // 获取视频元素
+      const video = document.getElementById("myVideo");
 
-      startBtn.addEventListener("click", () => {
+      // 初始化隐藏原生控件
+      video.controls = false;
+
+      // 播放控制
+      function togglePlay() {
+        if (video.paused) {
+          video.play();
+        } else {
+          video.pause();
+        }
+      }
+
+      // 点击视频区域控制播放
+      video.addEventListener("click", togglePlay);
+
+      // iOS自动播放处理（需要用户交互）
+      document.addEventListener(
+        "WeixinJSBridgeReady",
+        function () {
+          video.play();
+        },
+        false
+      );
+
+      // 安卓WebView自动播放配置
+      if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
         video.play();
-      });
-
-      pauseBtn.addEventListener("click", () => {
-        video.pause();
-      });
+      }
     </script>
   </body>
 </html>
