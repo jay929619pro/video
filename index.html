@@ -46,6 +46,21 @@
         height: 60px;
         cursor: pointer;
       }
+
+      .mask {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100px;
+        height: 100px;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        color: #fff;
+        font-size: 20px;
+        text-align: center;
+        line-height: 100px;
+      }
     </style>
   </head>
   <body>
@@ -68,6 +83,8 @@
       </video>
       <!-- 自定义播放按钮 -->
       <button onclick="togglePlay()">播放</button>
+
+      <div class="mask">mask</div>
     </div>
 
     <script>
