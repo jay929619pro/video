@@ -4,6 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+      button {
+        width: 200px;
+        height: 50px;
+        margin-right: 30px;
+        margin-top: 30px;
+      }
+    </style>
   </head>
   <body>
     <video
@@ -17,6 +25,25 @@
       crossorigin="anonymous"
       data-xgplayerid="db067458-8e20-47d0-80d9-611c1bbaebe7"
       src="./demo.mp4"
+      id="video"
     ></video>
+    <br />
+    <button id="startBtn">开始</button>
+    <br />
+    <button id="pauseBtn">暂停</button>
+
+    <script>
+      const video = document.getElementById("video");
+      const startBtn = document.getElementById("startBtn");
+      const pauseBtn = document.getElementById("pauseBtn");
+
+      startBtn.addEventListener("click", () => {
+        video.play();
+      });
+
+      pauseBtn.addEventListener("click", () => {
+        video.pause();
+      });
+    </script>
   </body>
 </html>
