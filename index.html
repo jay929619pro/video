@@ -1,124 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!doctype html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <!-- 关键兼容声明 -->
-    <meta name="x5-video-player-type" content="h5" />
-    <meta name="x5-video-player-fullscreen" content="false" />
-    <title>H5视频控件隐藏示例</title>
-    <style>
-      /* 通用隐藏样式 */
-      video::-webkit-media-controls {
-        display: none !important;
-      }
-      video::-webkit-media-controls-enclosure {
-        display: none !important;
-      }
-      video::-webkit-media-controls-panel {
-        display: none !important;
-      }
-      video::-webkit-media-controls-play-button {
-        display: none !important;
-      }
-      video::-moz-media-controls {
-        display: none !important;
-      }
-
-      /* 视频容器样式 */
-      .video-wrapper {
-        width: 100%;
-        max-width: 800px;
-        margin: 0 auto;
-        position: relative;
-        background: #000;
-        /* 解决安卓部分机型显示异常 */
-        transform: translateZ(0);
-      }
-
-      /* 自定义播放按钮（可选） */
-      .custom-play {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-      }
-
-      .mask {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100px;
-        height: 100px;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1000;
-        color: #fff;
-        font-size: 20px;
-        text-align: center;
-        line-height: 100px;
-      }
-    </style>
+    <title>Vite + Vue</title>
+    <script type="module" crossorigin src="/assets/index-PLW9A8Ch.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-dKLJdG_2.css">
   </head>
   <body>
-    <!-- 视频容器 -->
-    <div class="video-wrapper">
-      <video
-        id="myVideo"
-        width="100%"
-        height="auto"
-        playsinline
-        webkit-playsinline="true"
-        x5-video-player-type="h5"
-        x5-playsinline="true"
-        preload="auto"
-        controlsList="nodownload nofullscreen noremoteplayback"
-        poster="poster.jpg"
-      >
-        <source src="video.mp4" type="video/mp4" />
-        您的浏览器不支持视频播放
-      </video>
-      <!-- 自定义播放按钮 -->
-      <button onclick="togglePlay()">播放</button>
-
-      <div class="mask">mask</div>
-    </div>
-
-    <script>
-      // 获取视频元素
-      const video = document.getElementById("myVideo");
-
-      // 初始化隐藏原生控件
-      video.controls = false;
-
-      // 播放控制
-      function togglePlay() {
-        if (video.paused) {
-          video.play();
-        } else {
-          video.pause();
-        }
-      }
-
-      // 点击视频区域控制播放
-      video.addEventListener("click", togglePlay);
-
-      // iOS自动播放处理（需要用户交互）
-      document.addEventListener(
-        "WeixinJSBridgeReady",
-        function () {
-          video.play();
-        },
-        false
-      );
-
-      // 安卓WebView自动播放配置
-      if (navigator.userAgent.toLowerCase().indexOf("android") > -1) {
-        video.play();
-      }
-    </script>
+    <div id="app"></div>
   </body>
 </html>
